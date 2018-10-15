@@ -1,0 +1,23 @@
+{
+  "name": "chat-appliaction",
+  "version": "1.0.0",
+  "description": "simple chat application using socket.op",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaisalAhmedBD/Chat-Application.git"
+  },
+  "author": "faisal ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FaisalAhmedBD/Chat-Application/issues"
+  },
+  "homepage": "https://github.com/FaisalAhmedBD/Chat-Application#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.4"
+  }
+}
