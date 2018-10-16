@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import io from 'socket.io-client'
 import Messages from './components/Messages'
 import { Container, Row, Col, Form, FormGroup, Input, Button } from 'reactstrap'
-const socket = io.connect('http://localhost:4004')
+const socket = io.connect('http://localhost:4005')
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       userName: "",
       message: "",
-      messages: []
+      messages: [],
+      typing: ""
     }
   }
   componentDidMount() {
@@ -20,14 +21,22 @@ class App extends Component {
         messages: messages
       })
     })
+
+    socket.on('typing', data => {
+      console.log('typing received : ', data)
+      this.setState({
+        typing: `${data} is typing`
+      })
+    })
   }
   render() {
-    const { userName, message, messages } = this.state
+    const { userName, message, messages, typing } = this.state
 
     return (
       <Container>
         <Row>
           <Messages messages={messages} />
+          <p>typing: {typing}</p>
         </Row>
         <Row>
           <Form>
@@ -42,6 +51,10 @@ class App extends Component {
     );
   }
   inputFieldOnChange = (event) => {
+
+    if (event.target.name === 'message') {
+      socket.emit('typing', this.state.userName)
+    }
     this.setState({
       [event.target.name]: event.target.value
     })

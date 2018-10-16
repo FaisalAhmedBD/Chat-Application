@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 var server = require('http').Server(app);
-const PORT = 4004
+const PORT = 4005
 
 app.get('/', (req, res) => {
   res.send('hello')
@@ -18,5 +18,9 @@ io.on('connection', (socket) => {
 
   socket.on('newMessage', (data) => {
     io.sockets.emit('newMessage', data)
+  })
+
+  socket.on('typing', data => {
+    socket.broadcast.emit('typing', data)
   })
 });
