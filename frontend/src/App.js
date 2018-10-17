@@ -19,7 +19,8 @@ class App extends Component {
     socket.on('newMessage', (data) => {
       messages.push(`${data.userName} : ${data.message}`)
       this.setState({
-        messages: messages
+        messages: messages,
+        typing:""
       })
     })
 
@@ -37,7 +38,7 @@ class App extends Component {
       <Container>
         <Row>
           <Messages messages={messages} />
-          <p>typing: {typing}</p>
+          <p>{typing}</p>
         </Row>
         <Row>
           <Form>
