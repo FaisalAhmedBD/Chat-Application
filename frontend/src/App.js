@@ -20,11 +20,11 @@ class App extends Component {
       messages.push(`${data.userName} : ${data.message}`)
       this.setState({
         messages: messages,
-        typing:""
+        typing: ""
       })
     })
 
-    socket.on('typing!!!', data => {
+    socket.on('typing', data => {
       console.log('typing received : ', data)
       this.setState({
         typing: `${data} is typing`
@@ -36,24 +36,34 @@ class App extends Component {
 
     return (
       <Container>
-        <Row>
+        <Row style={styles.messageBox}>
           <Messages messages={messages} />
           <p>{typing}</p>
         </Row>
         <Row>
           <Form>
             <FormGroup>
-              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange}  />
+              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange} />
               <Input type="text" name="message" id="message" placeholder="" onChange={this.inputFieldOnChange} value={this.state.message} />
             </FormGroup>
             <Button onClick={this.sendButtonOnClick}>Send</Button>
           </Form>
         </Row>
+        <Row>
+          <Button onClick={this.clearMessages}>Clear All</Button>
+        </Row>
       </Container>
     );
   }
+  clearMessages = () => {
+    this.setState({
+      userName: "",
+      message: "",
+      messages: [],
+      typing: ""
+    })
+  }
   inputFieldOnChange = (event) => {
-
     if (event.target.name === 'message') {
       socket.emit('typing', this.state.userName)
     }
@@ -68,10 +78,18 @@ class App extends Component {
       userName: userName
     })
     this.setState({
-      message:""
+      message: ""
     })
   }
 
 }
-
 export default App;
+const styles = {
+  messageBox: {
+    minHeight: '200px',
+    backgroundColor: '#f5f5ef'
+  },
+  buttonStyle: {
+
+  }
+}

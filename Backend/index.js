@@ -22,6 +22,6 @@ io.on('connection', (socket) => {
 
   socket.on('typing', data => {
     console.log('server received typing : ',data)
-    socket.broadcast.emit('typing!!!', data)
+    socket.broadcast.emit('typing', data)
   })
 });
