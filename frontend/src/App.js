@@ -24,7 +24,7 @@ class App extends Component {
       })
     })
 
-    socket.on('typing', data => {
+    socket.on('typing!!!', data => {
       console.log('typing received : ', data)
       this.setState({
         typing: `${data} is typing`
@@ -43,8 +43,8 @@ class App extends Component {
         <Row>
           <Form>
             <FormGroup>
-              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange} />
-              <Input type="text" name="message" id="message" placeholder="" onChange={this.inputFieldOnChange} />
+              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange}  />
+              <Input type="text" name="message" id="message" placeholder="" onChange={this.inputFieldOnChange} value={this.state.message} />
             </FormGroup>
             <Button onClick={this.sendButtonOnClick}>Send</Button>
           </Form>
@@ -66,6 +66,9 @@ class App extends Component {
     socket.emit('newMessage', {
       message: message,
       userName: userName
+    })
+    this.setState({
+      message:""
     })
   }
 
