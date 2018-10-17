@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client'
 import FormField from './components/formField'
 import MessageBox from './components/messageBox'
-import { Container, Row, Col, Form, FormGroup, Input, Button } from 'reactstrap'
+import { Container, Row, Button } from 'reactstrap'
 const socket = io.connect('http://localhost:4005')
 class App extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class App extends Component {
 
   }
   componentDidMount() {
-    const { userName, message, messages } = this.state
+    const { messages } = this.state
     socket.on('newMessage', (data) => {
       messages.push(`${data.userName} : ${data.message}`)
       this.setState({
@@ -32,7 +32,7 @@ class App extends Component {
     })
   }
   render() {
-    const { userName, message, messages, typing } = this.state
+    const { messages, typing } = this.state
 
     return (
       <Container>
