@@ -35,7 +35,7 @@ class App extends Component {
     const { messages, typing } = this.state
 
     return (
-      <Container >
+      <Container className='col-sm-10 col-md-6 col-lg-8 col-xl-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-xl-offset-3'>
         <MessageBox
           messages={messages}
           typingMessage={typing}
@@ -78,7 +78,6 @@ class App extends Component {
       message: ""
     })
   }
-
 }
 export default App;
 const styles = {
