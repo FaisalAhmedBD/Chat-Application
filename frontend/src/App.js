@@ -43,14 +43,14 @@ class App extends Component {
         <Row>
           <Form>
             <FormGroup>
-              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange} />
-              <Input type="text" name="message" id="message" placeholder="" onChange={this.inputFieldOnChange} value={this.state.message} />
+              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange} style={styles.formField} />
+              <Input type="text" name="message" id="message" placeholder="" onChange={this.inputFieldOnChange} value={this.state.message} style={styles.formField} />
             </FormGroup>
-            <Button onClick={this.sendButtonOnClick}>Send</Button>
+            <Button onClick={this.sendButtonOnClick} style={styles.buttonStyle}>Send</Button>
           </Form>
         </Row>
         <Row>
-          <Button onClick={this.clearMessages}>Clear All</Button>
+          <Button onClick={this.clearMessages} style={styles.buttonStyle}>Clear All</Button>
         </Row>
       </Container>
     );
@@ -90,6 +90,12 @@ const styles = {
     backgroundColor: '#f5f5ef'
   },
   buttonStyle: {
-
+    padding: '1%',
+    paddingLeft:'5%',
+    paddingRight:'5%',
+    borderRadius:'10px'
+  },
+  formField:{
+    padding:'1%'
   }
 }
