@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client'
-import Messages from './components/Messages'
 import FormField from './components/formField'
 import MessageBox from './components/messageBox'
 import { Container, Row, Col, Form, FormGroup, Input, Button } from 'reactstrap'
@@ -27,7 +26,6 @@ class App extends Component {
     })
 
     socket.on('typing', data => {
-      console.log('typing received : ', data)
       this.setState({
         typing: `${data} is typing`
       })
@@ -63,17 +61,14 @@ class App extends Component {
   }
 
   inputFieldOnChange = (event) => {
-    console.log('event : ', event.target.name, event.target.value)
     if (event.target.name === 'message') {
       socket.emit('typing', this.state.userName)
     }
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log('state : ', this.state)
   }
   sendButtonOnClick = (event) => {
-    console.log('event : ', event.target.name, event.target.value)
     const { userName, message } = this.state
     socket.emit('newMessage', {
       message: message,
@@ -87,17 +82,10 @@ class App extends Component {
 }
 export default App;
 const styles = {
-  messageBox: {
-    minHeight: '200px',
-    backgroundColor: '#f5f5ef'
-  },
   buttonStyle: {
     padding: '1%',
     paddingLeft: '5%',
     paddingRight: '5%',
     borderRadius: '10px'
-  },
-  formField: {
-    padding: '1%'
   }
 }
