@@ -12,6 +12,7 @@ class App extends Component {
       messages: [],
       typing: ""
     }
+
   }
   componentDidMount() {
     const { userName, message, messages } = this.state
