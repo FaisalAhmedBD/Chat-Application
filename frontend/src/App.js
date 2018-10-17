@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client'
 import Messages from './components/Messages'
 import FormField from './components/formField'
+import MessageBox from './components/messageBox'
 import { Container, Row, Col, Form, FormGroup, Input, Button } from 'reactstrap'
 const socket = io.connect('http://localhost:4005')
 class App extends Component {
@@ -37,16 +38,15 @@ class App extends Component {
 
     return (
       <Container>
-        <Row style={styles.messageBox}>
-          <Messages messages={messages} />
-          <p>{typing}</p>
-        </Row>
+        <MessageBox
+          messages={messages}
+          typingMessage={typing}
+        />
         <FormField
           inputFieldOnChange={this.inputFieldOnChange}
           value={this.state.message}
-          sendButtonOnClick={this.sendButtonOnClick} 
-          />
-
+          sendButtonOnClick={this.sendButtonOnClick}
+        />
         <Row>
           <Button onClick={this.clearMessages} style={styles.buttonStyle}>Clear All</Button>
         </Row>
