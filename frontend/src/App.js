@@ -35,7 +35,7 @@ class App extends Component {
     const { messages, typing } = this.state
 
     return (
-      <Container>
+      <Container >
         <MessageBox
           messages={messages}
           typingMessage={typing}
