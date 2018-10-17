@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client'
 import Messages from './components/Messages'
+import FormField from './components/formField'
 import { Container, Row, Col, Form, FormGroup, Input, Button } from 'reactstrap'
 const socket = io.connect('http://localhost:4005')
 class App extends Component {
@@ -40,15 +41,12 @@ class App extends Component {
           <Messages messages={messages} />
           <p>{typing}</p>
         </Row>
-        <Row>
-          <Form>
-            <FormGroup>
-              <Input type="text" name="userName" id="userName" placeholder="name" onChange={this.inputFieldOnChange} style={styles.formField} />
-              <Input type="text" name="message" id="message" placeholder="" onChange={this.inputFieldOnChange} value={this.state.message} style={styles.formField} />
-            </FormGroup>
-            <Button onClick={this.sendButtonOnClick} style={styles.buttonStyle}>Send</Button>
-          </Form>
-        </Row>
+        <FormField
+          inputFieldOnChange={this.inputFieldOnChange}
+          value={this.state.message}
+          sendButtonOnClick={this.sendButtonOnClick} 
+          />
+
         <Row>
           <Button onClick={this.clearMessages} style={styles.buttonStyle}>Clear All</Button>
         </Row>
@@ -63,15 +61,19 @@ class App extends Component {
       typing: ""
     })
   }
+
   inputFieldOnChange = (event) => {
+    console.log('event : ', event.target.name, event.target.value)
     if (event.target.name === 'message') {
       socket.emit('typing', this.state.userName)
     }
     this.setState({
       [event.target.name]: event.target.value
     })
+    console.log('state : ', this.state)
   }
   sendButtonOnClick = (event) => {
+    console.log('event : ', event.target.name, event.target.value)
     const { userName, message } = this.state
     socket.emit('newMessage', {
       message: message,
@@ -91,11 +93,11 @@ const styles = {
   },
   buttonStyle: {
     padding: '1%',
-    paddingLeft:'5%',
-    paddingRight:'5%',
-    borderRadius:'10px'
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    borderRadius: '10px'
   },
-  formField:{
-    padding:'1%'
+  formField: {
+    padding: '1%'
   }
 }
