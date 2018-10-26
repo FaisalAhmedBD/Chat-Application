@@ -7,7 +7,6 @@
 ##  Features
       - send message
       - getting notification when others are typing message
-      - 
 # Build instruction
 1.  clone the repo
 2.  move to Backend and Frontend sub-folder and run `npm install`
