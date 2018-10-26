@@ -1,8 +1,8 @@
 # Chat-Application
 ### Used Technologies
- Backend
+1. Backend
   - node.js, express.js, socket.io
- Frontend
+2. Frontend
   - Reactjs
 ##  Features
       - send message
